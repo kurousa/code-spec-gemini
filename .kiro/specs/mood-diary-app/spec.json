@@ -1,0 +1,29 @@
+{
+  "feature_name": "mood-diary-app",
+  "project_description": "日々の気分を記録する日記のようなアプリを作りたい",
+  "created_at": "2025-07-27T12:00:00Z",
+  "updated_at": "2025-07-27T12:00:00Z",
+  "language": "japanese",
+  "phase": "tasks-generated",
+  "approvals": {
+    "requirements": {
+      "generated": true,
+      "approved": true
+    },
+    "design": {
+      "generated": true,
+      "approved": true
+    },
+    "tasks": {
+      "generated": true,
+      "approved": true
+    }
+  },
+  "ready_for_implementation": true,
+    "tasks": {
+      "generated": false,
+      "approved": false
+    }
+  },
+  "ready_for_implementation": false
+}
