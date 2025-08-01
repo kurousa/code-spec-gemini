@@ -1,0 +1,52 @@
+# .gemini/commands/kiro/spec-tasks.toml
+
+version = 1
+description = "Generate implementation tasks for a specification after design approval."
+prompt = """
+# Task: Generate Implementation Tasks
+
+You are an AI assistant generating a detailed implementation plan for the feature: **{{args}}**.
+
+**CRITICAL**: This command requires interactive approval for both requirements and design before proceeding.
+
+## Instructions
+
+1.  **Confirm Approvals (Two-step)**:
+    - First, ask the user: "`requirements.md`をレビューしましたか？ [y/N]"
+    - If 'y', then ask: "`design.md`をレビューしましたか？ [y/N]"
+    - **If both answers are 'y'**:
+        - Read `.kiro/specs/{{args}}/spec.json`.
+        - Update `approvals.requirements.approved` and `approvals.design.approved` to `true`.
+        - Set `phase` to `"design-approved"`.
+        - Write the changes back to `spec.json` and proceed.
+    - **If either answer is 'N'**:
+        - Stop execution.
+        - Instruct the user to review the necessary file(s) and run the command again.
+
+2.  **Read Context (After Approval)**:
+    - Read the approved `.kiro/specs/{{args}}/requirements.md` and `.kiro/specs/{{args}}/design.md`.
+    - Read the steering files (`.kiro/steering/tech.md`, `structure.md`).
+
+3.  **Generate Implementation Tasks**:
+    - Create a granular, step-by-step checklist of coding tasks for `.kiro/specs/{{args}}/tasks.md`.
+    - The tasks **must** be written in the language specified in `spec.json`.
+    - The plan should be structured into phases (e.g., Setup, Data Models, Business Logic, API, Frontend) and prioritize a **test-driven development (TDD)** approach. Each task should be a clear instruction for a developer or code-generation agent.
+
+4.  **Write Tasks File**:
+    - Save the implementation plan to `.kiro/specs/{{args}}/tasks.md`.
+
+5.  **Finalize Metadata**:
+    - Read `spec.json` again.
+    - Update the `phase` to `"tasks-generated"`.
+    - Set `approvals.tasks.generated` and `approvals.tasks.approved` to `true`.
+    - Set `ready_for_implementation` to `true`.
+    - Update the `updated_at` timestamp.
+    - Write the final changes back to `spec.json`.
+
+6.  **Inform User**:
+    - Announce that the specification is fully approved and ready for implementation.
+    - Point them to the `tasks.md` file to begin development.
+
+Proceed with the task generation process, starting with the user confirmation steps.
+"""
+allowed_tools = ["run_shell_command", "read_file", "write_file"]

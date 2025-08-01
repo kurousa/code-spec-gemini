@@ -1,0 +1,35 @@
+# .gemini/commands/kiro/spec-init.toml
+
+# The command is invoked via: kiro spec-init "[feature description]"
+version = 1
+description = "Initialize a new specification with a detailed project description and requirements."
+prompt = """
+# Task: Initialize Specification
+
+You are an AI assistant responsible for managing software specifications. A user has invoked the `kiro spec-init` command to start a new feature specification.
+
+**User's Project Description**:
+{{args}}
+
+Your task is to follow the instructions outlined in the command's markdown definition to initialize the necessary files and directory structure.
+
+## Instructions
+
+1.  **Analyze Project Description**: From the user's input (`{{args}}`), extract the core purpose and generate a concise, filesystem-friendly feature name (e.g., `user-authentication-flow`).
+2.  **Check for Steering Context**: Before creating files, read the following steering documents to understand the project context. This is a read-only step to gather information.
+    - `.kiro/steering/product.md`
+    - `.kiro/steering/tech.md`
+    - `.kiro/steering/structure.md`
+    *If these files do not exist, proceed without them.*
+3.  **Create Spec Directory**: Use the `run_shell_command` tool to create a new directory at `.kiro/specs/{generated-feature-name}/`.
+4.  **Create `spec.json`**: Inside the new directory, use the `write_file` tool to create `spec.json`. Populate it with the feature name, the full project description, and the default phase/approval status. Remember to set the timestamp.
+5.  **Create Markdown Stubs**: Use the `write_file` tool to create the following empty placeholder files in the new directory:
+    - `requirements.md`
+    - `design.md`
+    - `tasks.md`
+    *Use the template content provided in the original markdown file for these stubs.*
+6.  **Confirm and Guide**: After successfully creating the files, inform the user of the generated feature name, the location of the new files, and provide the exact next command they should run (e.g., `kiro spec-requirements {generated-feature-name}`).
+
+Proceed with the initialization process.
+"""
+allowed_tools = ["run_shell_command", "read_file", "write_file"]

@@ -1,0 +1,55 @@
+# .gemini/commands/kiro/spec-design.toml
+
+version = 1
+description = "Create a technical design for a specification after requirements approval."
+prompt = """
+# Task: Create Technical Design
+
+You are an AI assistant creating a technical design for the feature: **{{args}}**.
+
+**CRITICAL**: This command requires interactive approval from the user before proceeding.
+
+## Instructions
+
+1.  **Confirm Requirements Approval**:
+    - First, ask the user the following question exactly: "`requirements.md`をレビューしましたか？ [y/N]"
+    - **If the user responds with 'y'**:
+        - Read `.kiro/specs/{{args}}/spec.json`.
+        - Update `approvals.requirements.approved` to `true` and `phase` to `"requirements-approved"`.
+        - Write the changes back to `spec.json`.
+        - Proceed to the next step.
+    - **If the user responds with 'N' or anything else**:
+        - Stop execution.
+        - Instruct the user to review `requirements.md` and run the command again when ready.
+
+2.  **Read Context (After Approval)**:
+    - Read the now-approved `.kiro/specs/{{args}}/requirements.md`.
+    - Read the steering files (`.kiro/steering/product.md`, `tech.md`, `structure.md`).
+
+3.  **Research Best Practices**:
+    - Use the `google_web_search` tool to research current best practices for the technologies and patterns relevant to the requirements.
+
+4.  **Generate Technical Design**:
+    - Create a comprehensive technical design for `.kiro/specs/{{args}}/design.md`.
+    - The design **must** be written in the language specified in `spec.json`.
+    - The document must follow the structure defined in the command's markdown, including sections for Architecture, Data Flow, Components, Security, etc.
+    - **Use mermaid diagrams** to illustrate architecture, data flows, and data models.
+
+5.  **Write Design File**:
+    - Save the complete design document to `.kiro/specs/{{args}}/design.md`.
+
+6.  **Update Metadata**:
+    - Read `spec.json` again.
+    - Update the `phase` to `"design-generated"`.
+    - Set `approvals.design.generated` to `true`.
+    - Update the `updated_at` timestamp.
+    - Write the changes back to `spec.json`.
+
+7.  **Inform User**:
+    - Notify the user that the technical design has been generated.
+    - Instruct them to review the `design.md` file.
+    - Advise them that the next step is `kiro spec-tasks {{args}}`.
+
+Proceed with the design generation process, starting with the user confirmation step.
+"""
+allowed_tools = ["run_shell_command", "read_file", "write_file", "google_web_search"]

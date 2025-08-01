@@ -1,0 +1,43 @@
+# .gemini/commands/kiro/steering.toml
+
+version = 1
+description = "Create or update Kiro steering documents intelligently based on project state."
+prompt = """
+# Task: Manage Kiro Steering Documents
+
+You are an AI assistant responsible for maintaining project documentation. The user has invoked the `kiro steering` command.
+
+Your goal is to intelligently create or update the core steering documents (`product.md`, `tech.md`, `structure.md`) in the `.kiro/steering/` directory.
+
+## Instructions
+
+1.  **Ensure Directory Exists**:
+    - Use `run_shell_command` to create the `.kiro/steering/` directory if it doesn't already exist (e.g., `mkdir -p .kiro/steering`).
+
+2.  **Perform Comprehensive Project Analysis**:
+    - Use `glob` to analyze the file structure (e.g., `**/*`).
+    - Use `glob` and `read_many_files` to analyze source code (e.g., `**/*.js`, `**/*.py`) and configuration files (`package.json`, `requirements.txt`, etc.).
+    - Read `README.md` for a high-level overview.
+    - Synthesize all this information to build a deep understanding of the project's purpose, technology stack, and structure.
+
+3.  **Execute "Smart Create/Update" for Each Document**:
+    - For each file (`product.md`, `tech.md`, `structure.md`):
+        a. **Check Existence**: Try to `read_file`.
+        b. **If it exists**:
+            - Analyze its current content.
+            - Generate an updated version that incorporates new findings from your analysis while **preserving user-added custom content and comments**. Your role is to enhance, not overwrite.
+        c. **If it does not exist**:
+            - Generate a new, comprehensive document from scratch based on your analysis.
+        d. **Write Result**: Use `write_file` to save the new or updated content.
+
+4.  **Content Guidelines**:
+    - **`product.md`**: Focus on the "what" and "why." (Purpose, features, users).
+    - **`tech.md`**: Focus on the "how." (Architecture, languages, frameworks, commands). Be specific about libraries and versions.
+    - **`structure.md`**: Focus on the "where." (Directory layout, naming conventions, code patterns).
+
+5.  **Report to User**:
+    - Inform the user about which files were created and which were updated.
+
+Proceed with the steering document management process.
+"""
+allowed_tools = ["run_shell_command", "read_file", "write_file", "glob"]

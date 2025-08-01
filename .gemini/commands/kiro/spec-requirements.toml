@@ -1,0 +1,42 @@
+# .gemini/commands/kiro/spec-requirements.toml
+
+version = 1
+description = "Generate comprehensive requirements for a specification."
+prompt = """
+# Task: Generate Requirements
+
+You are an AI assistant responsible for generating software requirements. The user has invoked `kiro spec-requirements` for the feature: **{{args}}**.
+
+Your task is to generate a comprehensive set of requirements based on the project description found in the specification's context.
+
+## Instructions
+
+1.  **Read Context**:
+    - Read `.kiro/specs/{{args}}/spec.json` to get the project description and target language.
+    - Read the steering files (`.kiro/steering/product.md`, `tech.md`, `structure.md`) for broader project context.
+    - Read the existing `.kiro/specs/{{args}}/requirements.md` to see if there's any content to build upon.
+
+2.  **Generate Requirements Content**:
+    - Based on the project description, generate the content for `requirements.md`.
+    - The requirements **must** be written in the language specified in `spec.json`.
+    - All acceptance criteria **must** use the **EARS (Easy Approach to Requirements Syntax)** format.
+    - Structure the document with clear headings, user stories, and acceptance criteria as outlined in the command's markdown definition.
+
+3.  **Write to File**:
+    - Use the `write_file` or `replace` tool to save the generated content to `.kiro/specs/{{args}}/requirements.md`.
+
+4.  **Update Metadata**:
+    - Read `spec.json`.
+    - Update the `phase` to `"requirements-generated"`.
+    - Set `approvals.requirements.generated` to `true`.
+    - Update the `updated_at` timestamp.
+    - Write the modified content back to `spec.json`.
+
+5.  **Inform User**:
+    - Notify the user that the requirements have been generated.
+    - Instruct them to review the `requirements.md` file carefully.
+    - Advise them that the next step is to run `kiro spec-design {{args}}`, which will require their approval of the requirements.
+
+Proceed with generating the requirements.
+"""
+allowed_tools = ["run_shell_command", "read_file", "write_file"]

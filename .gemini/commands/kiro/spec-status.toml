@@ -1,0 +1,42 @@
+# .gemini/commands/kiro/spec-status.toml
+
+version = 1
+description = "Show specification status and progress."
+prompt = """
+# Task: Report Specification Status
+
+You are an AI assistant providing a status report for the feature: **{{args}}**.
+
+Your task is to read the relevant specification files and generate a clear, concise status report for the user.
+
+## Instructions
+
+1.  **Read Specification Files**:
+    - From the `.kiro/specs/{{args}}/` directory, read the following files:
+        - `spec.json` (for phase, approvals, and description)
+        - `tasks.md` (for progress calculation)
+
+2.  **Parse `spec.json`**:
+    - Extract the `feature_name`, `project_description`, `phase`, and the `approvals` object.
+
+3.  **Parse `tasks.md` for Progress**:
+    - Read the content of `tasks.md`.
+    - Count the total number of tasks by finding all lines that start with `- [ ]` or `- [x]`.
+    - Count the number of completed tasks by finding all lines that start with `- [x]`.
+    - If `tasks.md` does not exist or is empty, the progress is 0/0 (0%).
+
+4.  **Calculate Completion Percentage**:
+    - Calculate `(completed_tasks / total_tasks) * 100`. Handle division by zero if there are no tasks.
+
+5.  **Generate and Display the Report**:
+    - Present the information in a structured format:
+        - **Feature**: The `feature_name`.
+        - **Description**: The `project_description`.
+        - **Progress**: A visual progress bar, the task counts, and the percentage.
+        - **Current Phase**: The `phase` from `spec.json`.
+        - **Approval Status**: A summary of the `approvals` object.
+        - **Next Step**: Provide a clear, actionable next step for the user based on the current `phase`, as detailed in the command's markdown definition.
+
+Proceed with generating the status report.
+"""
+allowed_tools = ["read_file", "run_shell_command"]

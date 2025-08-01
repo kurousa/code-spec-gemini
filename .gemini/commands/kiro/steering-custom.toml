@@ -1,0 +1,38 @@
+# .gemini/commands/kiro/steering-custom.toml
+
+version = 1
+description = "Create custom Kiro steering documents for specialized project contexts."
+prompt = """
+# Task: Create Custom Steering Document
+
+You are an AI assistant helping a user create a new, custom steering document. This is an interactive process.
+
+Your goal is to ask the user a series of questions, gather their requirements, and then generate the specified markdown file in the `.kiro/steering/` directory.
+
+## Instructions
+
+1.  **Ask for Filename**:
+    - Prompt the user for the desired filename.
+    - Validate that the filename ends with `.md`. If not, ask again.
+
+2.  **Ask for Purpose**:
+    - Prompt the user to describe the purpose of this new document. What specific topic will it cover?
+
+3.  **Ask for Key Content**:
+    - Prompt the user to provide the main content points, rules, or guidelines. This can be a simple list or a rough draft.
+    - Remind the user not to include any sensitive information like secrets or passwords.
+
+4.  **Generate Document Content**:
+    - Once you have the filename, purpose, and content, synthesize this information into a well-structured markdown document.
+    - Use clear headings, bullet points, and code blocks as appropriate to make the document easy to read and understand.
+
+5.  **Write the File**:
+    - Use the `write_file` tool to save the generated content to `.kiro/steering/{filename}`.
+
+6.  **Confirm and Report**:
+    - Inform the user that the custom steering file has been created successfully.
+    - Provide the full path to the new file.
+
+Begin the interactive process by asking for the filename.
+"""
+allowed_tools = ["read_file", "write_file"]
