@@ -49,14 +49,14 @@ A documentation-driven framework built on the Gemini CLI. The architecture consi
 ### Core Workflow Commands
 ```bash
 # Steering management
-kiro steering                    # Smartly creates or updates steering documents
+/kiro:steering                    # Smartly creates or updates steering documents
 
 # Specification workflow
-kiro spec-init "[description]"   # Initializes a new specification
-kiro spec-requirements [name]    # Generates the requirements document
-kiro spec-design [name]          # Generates the technical design
-kiro spec-tasks [name]           # Generates implementation tasks
-kiro spec-status [name]          # Checks progress and compliance
+/kiro:spec-init "[description]"   # Initializes a new specification
+/kiro:spec-requirements [name]    # Generates the requirements document
+/kiro:spec-design [name]          # Generates the technical design
+/kiro:spec-tasks [name]           # Generates implementation tasks
+/kiro:spec-status [name]          # Checks progress and compliance
 ```
 
 ### Manual Operations

@@ -33,12 +33,12 @@ gemini-code-spec/
 .gemini/
 └── commands/
     └── kiro/
-        ├── steering.md
-        ├── spec-init.md
-        ├── spec-requirements.md
-        ├── spec-design.md
-        ├── spec-tasks.md
-        └── spec-status.md
+        ├── steering.toml
+        ├── spec-init.toml
+        ├── spec-requirements.toml
+        ├── spec-design.toml
+        ├── spec-tasks.toml
+        └── spec-status.toml
 ```
 
 ## File Naming Conventions
@@ -65,7 +65,7 @@ Brief introduction to the section.
 A command definition is a markdown file that contains instructions for the Gemini CLI agent.
 
 ```markdown
-# Command: `kiro spec-init`
+# Command: `/kiro:spec-init`
 
 ## Description
 Initializes a new feature specification structure.
@@ -99,6 +99,6 @@ Initializes a new feature specification structure.
 - **Phase 0**: Basic steering document creation (optional).
 - **Phase 1**: Specification workflow (requirements → design → tasks).
 - **Phase 2**: Implementation based on approved specifications.
-- **Phase 3**: Progress tracking via `kiro spec-status`.
+- **Phase 3**: Progress tracking via `/kiro:spec-status`.
 
 This structure enables systematic development while maintaining flexibility for customization and extension.
