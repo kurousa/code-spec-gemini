@@ -1,0 +1,42 @@
+# .gemini/commands/kiro/run-tasks.toml
+
+version = 1
+description = "Execute implementation tasks for a feature after the specification is approved."
+prompt = """
+# Task: Execute Implementation Tasks
+
+You are an AI assistant responsible for executing the implementation plan for the feature: **{{args}}**.
+
+**CRITICAL**: This command can modify the codebase. Proceed with caution.
+
+## Instructions
+
+1.  **Check Readiness**:
+    - Read the specification metadata from `.kiro/specs/{{args}}/spec.json`.
+    - Verify that the `ready_for_implementation` flag is set to `true`.
+    - **If not `true`**: Stop execution and inform the user that the specification is not yet approved for implementation. Advise them to run `kiro spec-tasks {{args}}` to finalize the specification.
+
+2.  **Confirm with User**:
+    - If the feature is ready, ask the user for confirmation before making any changes:
+      "The specification for '{{args}}' is ready for implementation. Shall I proceed with executing the tasks? [y/N]"
+    - **If the user replies 'N'**: Stop execution and report that the operation was cancelled.
+
+3.  **Execute Tasks (On Approval)**:
+    - **If the user replies 'y'**:
+        - Read the steering documents for context: `.kiro/steering/tech.md` and `.kiro/steering/structure.md`.
+        - Read the implementation plan from `.kiro/specs/{{args}}/tasks.md`.
+        - Process `tasks.md` step-by-step. For each task:
+            - Execute the required action (e.g., create files with `write_file`, modify code with `replace`, run build commands with `run_shell_command`).
+            - After successfully completing a task, update its status in `tasks.md` by changing its line from `- [ ]` to `- [x]`. Use the `replace` tool for this.
+        - Update the `phase` in `spec.json` to `"implementation-in-progress"`.
+
+4.  **Finalize**:
+    - Once all tasks in `tasks.md` are marked as complete (`- [x]`):
+        - Update the `phase` in `spec.json` to `"implementation-complete"`.
+        - Update the `updated_at` timestamp.
+        - Write the changes back to `spec.json`.
+        - Inform the user that all tasks have been completed successfully.
+
+Proceed with the task execution process, starting with the readiness check.
+"""
+allowed_tools = ["run_shell_command", "read_file", "write_file", "replace"]

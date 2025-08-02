@@ -72,6 +72,13 @@ Gemini CLIで以下のスラッシュコマンドを実行します。
     ```
     実行前に `design.md` のレビューが完了しているか確認されます。生成された `tasks.md` をレビュー・編集します。
 
+5.  **実装**
+    ```bash
+    # AIがタスクを実行
+    /kiro:spec-run-tasks [feature-name]
+    ```
+    AIが仕様承認済みのfeatureの実装タスク（tasks.md）を自動実行し、進捗を管理します。
+
 ### Phase 2: 進捗確認
 
 ```bash
@@ -100,6 +107,7 @@ Gemini CLIで以下のスラッシュコマンドを実行します。
 │           ├── spec-design.toml
 │           ├── spec-init.toml
 │           ├── spec-requirements.toml
+│           ├── spec-run-tasks.toml
 │           ├── spec-status.toml
 │           ├── spec-tasks.toml
 │           ├── steering-custom.toml
