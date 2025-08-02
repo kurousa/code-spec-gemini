@@ -30,7 +30,7 @@ A documentation-driven framework built on the Gemini CLI. The architecture consi
 
 ### Project Structure
 
-```
+```shell
 .gemini/
 └── commands/
     └── kiro/                  # Command definitions
