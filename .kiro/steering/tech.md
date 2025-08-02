@@ -4,28 +4,32 @@
 
 A documentation-driven framework built on the Gemini CLI. The architecture consists of two main layers:
 
-1.  **Command Layer**: Markdown-based command definitions that instruct the Gemini agent.
-2.  **Knowledge Layer**: Structured markdown documents (`.kiro/`) that provide persistent project context.
+1. **Command Layer**: Markdown-based command definitions that instruct the Gemini agent.
+2. **Knowledge Layer**: Structured markdown documents (`.kiro/`) that provide persistent project context.
 
 ## Core Technologies
 
 ### Gemini CLI Platform
+
 - **Base Platform**: [Gemini CLI](https://github.com/google/gemini-cli)
 - **Model**: Google's Gemini models.
 - **Extension System**: Custom command definitions in the `.gemini/commands/` directory.
 
 ### Command System
+
 - **Definition Format**: Markdown files that describe the command's purpose and provide instructions for the AI agent.
 - **Execution**: The Gemini CLI agent interprets these files to execute tasks using its available tools.
 
 ## Development Environment
 
 ### Required Tools
+
 - **Gemini CLI**: The latest version.
 - **Git**: For version control.
 - **A Text Editor**: For reviewing and editing the generated markdown documents.
 
 ### Project Structure
+
 ```
 .gemini/
 └── commands/
@@ -47,6 +51,7 @@ A documentation-driven framework built on the Gemini CLI. The architecture consi
 ## Common Commands
 
 ### Core Workflow Commands
+
 ```bash
 # Steering management
 /kiro:steering                    # Smartly creates or updates steering documents
@@ -61,6 +66,7 @@ A documentation-driven framework built on the Gemini CLI. The architecture consi
 ```
 
 ### Manual Operations
+
 ```bash
 # Project setup (one-time)
 cp -r .gemini/ /path/to/your-project/
@@ -74,8 +80,10 @@ cp GEMINI.md /path/to/your-project/
 ## Integration Points
 
 ### Git Integration
+
 - All steering and specification documents are stored in Git, allowing for version control and collaboration.
 - Commit messages can be standardized to reference specification tasks.
 
 ### Documentation Systems
+
 - The framework generates standard markdown documents, which are compatible with most documentation systems, wikis, and viewers.
