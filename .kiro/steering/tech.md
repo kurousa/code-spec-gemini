@@ -57,6 +57,7 @@ A documentation-driven framework built on the Gemini CLI. The architecture consi
 /kiro:spec-design [name]          # Generates the technical design
 /kiro:spec-tasks [name]           # Generates implementation tasks
 /kiro:spec-status [name]          # Checks progress and compliance
+/kiro:spec-run-tasks [name]       # Runs the implementation tasks
 ```
 
 ### Manual Operations

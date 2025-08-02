@@ -47,6 +47,11 @@ You are an AI assistant generating a detailed implementation plan for the featur
     - Announce that the specification is fully approved and ready for implementation.
     - Point them to the `tasks.md` file to begin development.
 
+7.  **Confirm Implementation Start**:
+    - Ask the user: "実装タスクへ着手しますか？ [y/N]"
+    - If 'y', execute the command `/kiro:spec-run-tasks {{args}}`.
+    - If 'N', inform the user that they can start the implementation later by running `/kiro:spec-run-tasks {{args}}`.
+
 Proceed with the task generation process, starting with the user confirmation steps.
 """
 allowed_tools = ["run_shell_command", "read_file", "write_file"]
