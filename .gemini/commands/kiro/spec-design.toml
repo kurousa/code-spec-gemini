@@ -48,7 +48,7 @@ You are an AI assistant creating a technical design for the feature: **{{args}}*
 7.  **Inform User**:
     - Notify the user that the technical design has been generated.
     - Instruct them to review the `design.md` file.
-    - Advise them that the next step is `kiro spec-tasks {{args}}`.
+    - Advise them that the next step is `/kiro:spec-tasks {{args}}`.
 
 Proceed with the design generation process, starting with the user confirmation step.
 """

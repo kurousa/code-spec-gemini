@@ -35,7 +35,7 @@ Your task is to generate a comprehensive set of requirements based on the projec
 5.  **Inform User**:
     - Notify the user that the requirements have been generated.
     - Instruct them to review the `requirements.md` file carefully.
-    - Advise them that the next step is to run `kiro spec-design {{args}}`, which will require their approval of the requirements.
+    - Advise them that the next step is to run `/kiro:spec-design {{args}}`, which will require their approval of the requirements.
 
 Proceed with generating the requirements.
 """

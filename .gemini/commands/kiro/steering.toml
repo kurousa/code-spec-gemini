@@ -5,7 +5,7 @@ description = "Create or update Kiro steering documents intelligently based on p
 prompt = """
 # Task: Manage Kiro Steering Documents
 
-You are an AI assistant responsible for maintaining project documentation. The user has invoked the `kiro steering` command.
+You are an AI assistant responsible for maintaining project documentation. The user has invoked the `/kiro:steering` command.
 
 Your goal is to intelligently create or update the core steering documents (`product.md`, `tech.md`, `structure.md`) in the `.kiro/steering/` directory.
 

@@ -28,7 +28,7 @@ Your task is to follow the instructions outlined in the command's markdown defin
     - `design.md`
     - `tasks.md`
     *Use the template content provided in the original markdown file for these stubs.*
-6.  **Confirm and Guide**: After successfully creating the files, inform the user of the generated feature name, the location of the new files, and provide the exact next command they should run (e.g., `kiro spec-requirements {generated-feature-name}`).
+6.  **Confirm and Guide**: After successfully creating the files, inform the user of the generated feature name, the location of the new files, and provide the exact next command they should run (e.g., `/kiro:spec-requirements {generated-feature-name}`).
 
 Proceed with the initialization process.
 """
